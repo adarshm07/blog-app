@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="15" height="16.5" viewBox="0 0 15 16.5">
+    <defs>
+        <style>
+            .cls-1{fill:none;stroke:#e56a6a;stroke-linecap:round;stroke-linejoin:round;stroke-width:1.5px}
+        </style>
+    </defs>
+    <g id="trash-2_1_" data-name="trash-2 (1)" transform="translate(.75 .75)">
+        <path id="Path_12074" data-name="Path 12074" class="cls-1" d="M3 6h13.5" transform="translate(-3 -3)"/>
+        <path id="Path_12075" data-name="Path 12075" class="cls-1" d="M15.5 5v10.5A1.5 1.5 0 0 1 14 17H6.5A1.5 1.5 0 0 1 5 15.5V5m2.25 0V3.5A1.5 1.5 0 0 1 8.75 2h3a1.5 1.5 0 0 1 1.5 1.5V5" transform="translate(-3.5 -2)"/>
+        <path id="Line_50" data-name="Line 50" class="cls-1" transform="translate(5.064 6.564)" d="M0 0v5.062"/>
+        <path id="Line_51" data-name="Line 51" class="cls-1" transform="translate(8.438 6.564)" d="M0 0v5.062"/>
+    </g>
+</svg>
