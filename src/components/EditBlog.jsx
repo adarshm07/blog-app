@@ -4,16 +4,17 @@ import { useNavigate, useParams } from "react-router-dom";
 
 const EditBlog = () => {
   const [title, setTitle] = useState("");
-  const [body, setBody] = useState("");
+  const [content, setContent] = useState("");
   const navigate = useNavigate();
   const { id } = useParams();
 
   useEffect(() => {
     axios
-      .get(`https://api.example.com/posts/${id}`)
+      .get(`http://localhost:8080/api/v1/blog/get/${id}`)
       .then((response) => {
-        setTitle(response.data.title);
-        setBody(response.data.body);
+        console.log(response.data.data);
+        setTitle(response.data.data.title);
+        setContent(response.data.data.description);
       })
       .catch((error) => {
         console.log(error);
@@ -22,10 +23,12 @@ const EditBlog = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const blog = { title, body };
-    axios.put(`https://api.example.com/posts/${id}`, blog).then(() => {
-      navigate("/");
-    });
+    const blog = { title: title, description: content };
+    axios
+      .put(`http://localhost:8080/api/v1/blog/update/${id}`, blog)
+      .then(() => {
+        navigate("/");
+      });
   };
 
   return (
@@ -36,14 +39,14 @@ const EditBlog = () => {
         <input
           type="text"
           required
-          value={title}
+          defaultValue={title}
           onChange={(e) => setTitle(e.target.value)}
         />
-        <label>Body:</label>
+        <label>Content:</label>
         <textarea
           required
-          value={body}
-          onChange={(e) => setBody(e.target.value)}
+          defaultValue={content}
+          onChange={(e) => setContent(e.target.value)}
         ></textarea>
         <button>Edit Blog</button>
       </form>

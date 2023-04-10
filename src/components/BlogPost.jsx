@@ -1,16 +1,18 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { useParams } from "react-router-dom";
 
-const BlogPost = ({ match }) => {
+const BlogPost = () => {
   const [blog, setBlog] = useState(null);
+  const { id } = useParams();
 
   useEffect(() => {
     axios
-      .get(`https://api.example.com/posts/${match.params.id}`)
+      .get(`http://localhost:8080/api/v1/blog/get/${id}`)
       .then((response) => {
-        setBlog(response.data);
+        setBlog(response.data.data);
       });
-  }, [match.params.id]);
+  }, [id]);
 
   if (!blog) {
     return <div>Loading...</div>;
@@ -19,7 +21,7 @@ const BlogPost = ({ match }) => {
   return (
     <div>
       <h2>{blog.title}</h2>
-      <p>{blog.body}</p>
+      <div dangerouslySetInnerHTML={{ __html: blog.description }}></div>
     </div>
   );
 };

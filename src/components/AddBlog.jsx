@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -8,8 +9,15 @@ function AddBlog() {
 
   function handleSubmit(event) {
     event.preventDefault();
-    // Create the blog post in the API
-    navigate("/");
+    axios
+      .post(`http://localhost:8080/api/v1/blog/add`, {
+        title: title,
+        description: content,
+      })
+      .then((response) => {
+        // console.log(response);
+        navigate("/");
+      });
   }
 
   return (
