@@ -9,6 +9,8 @@ function AddBlog() {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
 
+  // The form has an onSubmit event listener that triggers the handleSubmit function when the user submits the form. On successful completion of the POST request
+  //  and addition of the new blog post, the user is redirected to the home page of the blog using the useNavigate hook.
   function handleSubmit(event) {
     event.preventDefault();
     axios
