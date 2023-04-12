@@ -8,7 +8,7 @@ const BlogPost = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8080/api/v1/blog/get/${id}`)
+      .get(`http://localhost:4000/api/v1/blog/get/${id}`)
       .then((response) => {
         setBlog(response.data.data);
       });

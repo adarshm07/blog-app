@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
+import TextEditor from "./TextEditor";
 
 const EditBlog = () => {
   const [title, setTitle] = useState("");
@@ -10,9 +11,8 @@ const EditBlog = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8080/api/v1/blog/get/${id}`)
+      .get(`http://localhost:4000/api/v1/blog/get/${id}`)
       .then((response) => {
-        console.log(response.data.data);
         setTitle(response.data.data.title);
         setContent(response.data.data.description);
       })
@@ -25,7 +25,7 @@ const EditBlog = () => {
     e.preventDefault();
     const blog = { title: title, description: content };
     axios
-      .put(`http://localhost:8080/api/v1/blog/update/${id}`, blog)
+      .put(`http://localhost:4000/api/v1/blog/update/${id}`, blog)
       .then(() => {
         navigate("/");
       });
@@ -43,11 +43,7 @@ const EditBlog = () => {
           onChange={(e) => setTitle(e.target.value)}
         />
         <label>Content:</label>
-        <textarea
-          required
-          defaultValue={content}
-          onChange={(e) => setContent(e.target.value)}
-        ></textarea>
+        <TextEditor value={content} setValue={setContent} />
         <button>Edit Blog</button>
       </form>
     </div>
