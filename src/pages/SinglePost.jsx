@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import Layout from "../components/Layout";
 
-const BlogPost = () => {
+export default function SinglePost() {
   const [blog, setBlog] = useState(null);
   const { id } = useParams();
 
@@ -19,11 +20,16 @@ const BlogPost = () => {
   }
 
   return (
-    <div>
-      <h2>{blog.title}</h2>
-      <div dangerouslySetInnerHTML={{ __html: blog.description }}></div>
-    </div>
+    <Layout>
+      <div
+        className="d-flex justify-content-center align-items-center bg-primary text-white"
+        style={{ height: "200px" }}
+      >
+        <h1 className="text-center">{blog.title}</h1>
+      </div>
+      <div className="my-4">
+        <div dangerouslySetInnerHTML={{ __html: blog.description }}></div>
+      </div>
+    </Layout>
   );
-};
-
-export default BlogPost;
+}

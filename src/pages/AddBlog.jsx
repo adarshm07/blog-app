@@ -1,7 +1,8 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import TextEditor from "./TextEditor";
+import Layout from "../components/Layout";
+import TextEditor from "../components/TextEditor";
 
 function AddBlog() {
   const navigate = useNavigate();
@@ -25,25 +26,28 @@ function AddBlog() {
   }
 
   return (
-    <div>
-      <h2>Add Blog</h2>
+    <Layout>
+      <h2 className="fs-4 mt-3">Add New Post</h2>
       <form onSubmit={handleSubmit}>
         <div style={{ marginBottom: "20px" }}>
-          <label htmlFor="title">Title:</label>
           <input
             type="text"
+            className="form-control"
             id="title"
             value={title}
             onChange={(event) => setTitle(event.target.value)}
+            placeholder="Title"
           />
         </div>
         <div>
           <label htmlFor="content">Content:</label>
           <TextEditor value={content} setValue={setContent} />
         </div>
-        <button type="submit">Add Blog</button>
+        <button className="btn btn-sm btn-primary mt-4" type="submit">
+          Publish
+        </button>
       </form>
-    </div>
+    </Layout>
   );
 }
 

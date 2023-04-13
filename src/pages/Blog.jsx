@@ -2,10 +2,11 @@ import React, { useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { allPosts } from "../store/postsSlice";
 import { toast } from "react-toastify";
+import { allPosts } from "../store/postsSlice";
+import Layout from "../components/Layout";
 
-const BlogList = () => {
+export default function Blog() {
   const dispatch = useDispatch();
   const blogs = useSelector((state) => state.posts.allPosts);
 
@@ -32,27 +33,28 @@ const BlogList = () => {
   }, []);
 
   return (
-    <div>
-      <h2>Blog List</h2>
-      <button onClick={() => (window.location.href = "/add-blog")}>
-        Add blog
-      </button>
+    <Layout>
+      <div
+        className="d-flex justify-content-center align-items-center bg-primary text-white"
+        style={{ height: "200px" }}
+      >
+        <h1 className="text-center">Blog</h1>
+      </div>
       {blogs &&
         blogs.map((item) => {
           return (
-            <div key={item._id}>
-              <h3>{item.title}</h3>
-              <div dangerouslySetInnerHTML={{ __html: item.description }}></div>
-              <Link to={`/blog/${item._id}`}>Read more</Link>
-              <button onClick={() => window.open(`/edit-blog/${item._id}`)}>
-                Edit
-              </button>
-              <button onClick={() => deletePostById(item._id)}>Delete</button>
+            <div key={item._id} className="card my-4">
+              <div className="card-body">
+                <h5 className="card-title">{item.title}</h5>
+                {/* <div
+                  className="card-text"
+                  dangerouslySetInnerHTML={{ __html: item.description }}
+                ></div> */}
+                <Link to={`/blog/${item._id}`}>Read more</Link>
+              </div>
             </div>
           );
         })}
-    </div>
+    </Layout>
   );
-};
-
-export default BlogList;
+}

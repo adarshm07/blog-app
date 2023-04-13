@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
-import TextEditor from "./TextEditor";
+import TextEditor from "../components/TextEditor";
 
 const EditBlog = () => {
   const [title, setTitle] = useState("");
@@ -35,14 +35,14 @@ const EditBlog = () => {
     <div>
       <h2>Edit Blog</h2>
       <form onSubmit={handleSubmit}>
-        <label>Title:</label>
         <input
           type="text"
+          className="form-control"
+          placeholder="Title"
           required
           defaultValue={title}
           onChange={(e) => setTitle(e.target.value)}
         />
-        <label>Content:</label>
         <TextEditor value={content} setValue={setContent} />
         <button>Edit Blog</button>
       </form>
