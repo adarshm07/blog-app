@@ -46,10 +46,6 @@ export default function Blog() {
             <div key={item._id} className="card my-4">
               <div className="card-body">
                 <h5 className="card-title">{item.title}</h5>
-                {/* <div
-                  className="card-text"
-                  dangerouslySetInnerHTML={{ __html: item.description }}
-                ></div> */}
                 <Link to={`/blog/${item._id}`}>Read more</Link>
               </div>
             </div>
