@@ -2,12 +2,14 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import TextEditor from "../components/TextEditor";
+import Layout from "../components/Layout";
 
 const EditBlog = () => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const navigate = useNavigate();
   const { id } = useParams();
+  console.log(id);
 
   useEffect(() => {
     axios
@@ -32,7 +34,7 @@ const EditBlog = () => {
   };
 
   return (
-    <div>
+    <Layout>
       <h2>Edit Blog</h2>
       <form onSubmit={handleSubmit}>
         <input
@@ -46,7 +48,7 @@ const EditBlog = () => {
         <TextEditor value={content} setValue={setContent} />
         <button>Edit Blog</button>
       </form>
-    </div>
+    </Layout>
   );
 };
 

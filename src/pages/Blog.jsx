@@ -9,6 +9,10 @@ import Layout from "../components/Layout";
 export default function Blog() {
   const dispatch = useDispatch();
   const blogs = useSelector((state) => state.posts.allPosts);
+  // you can also use a normal useState hook to store the blog posts, redux is used when you have
+  // some data which you need in more than one page or like globally over the application.
+
+  const isLoggedIn = useSelector((state) => state.user.loggedIn);
 
   // The 'fetchAllBlog' function is triggered, fetching all the blog posts using the URL specified in axios.get.
   const fetchAllBlog = async () => {
@@ -46,7 +50,27 @@ export default function Blog() {
             <div key={item._id} className="card my-4">
               <div className="card-body">
                 <h5 className="card-title">{item.title}</h5>
-                <Link to={`/blog/${item._id}`}>Read more</Link>
+
+                <div className="d-flex justify-content-between">
+                  {/* show edit and delete btn only if user is logged in. */}
+                  {isLoggedIn && (
+                    <div className="d-flex gap-1">
+                      <Link
+                        className="btn btn-sm btn-primary px-4"
+                        to={`/edit-blog/${item._id}`}
+                      >
+                        Edit
+                      </Link>
+                      <button
+                        className="btn btn-sm btn-warning px-4"
+                        onClick={() => deletePostById(item._id)}
+                      >
+                        Delete
+                      </button>
+                    </div>
+                  )}
+                  <Link to={`/blog/${item._id}`}>Read more</Link>
+                </div>
               </div>
             </div>
           );

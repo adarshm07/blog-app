@@ -32,38 +32,46 @@ export default function Register() {
   };
   return (
     <Layout>
-      <div className="w-25 m-auto border border-1 rounded p-4 mt-4">
-        <h1 className="fs-4">Register</h1>
-        <input
-          type="text"
-          class="form-control mt-4"
-          placeholder="First Name"
-          onChange={(e) => setUser({ ...user, firstName: e.target.value })}
-        />
-        <input
-          type="text"
-          class="form-control mt-4"
-          placeholder="Last Name"
-          onChange={(e) => setUser({ ...user, lastName: e.target.value })}
-        />
-        <input
-          type="text"
-          class="form-control mt-4"
-          placeholder="Email"
-          onChange={(e) => setUser({ ...user, email: e.target.value })}
-        />
-        <input
-          type="password"
-          class="form-control mt-3"
-          placeholder="Password"
-          onChange={(e) => setUser({ ...user, password: e.target.value })}
-        />
-        <button className="w-100 btn btn-primary mt-4" onClick={handleRegister}>
-          Register
-        </button>
-        <p className="mt-2">
-          Already have an account? <Link to="/login">Login</Link>
-        </p>
+      <div className="row">
+        <div className="col-12 col-md-3 col-lg-4"></div>
+        <div className="col-12 col-md-6 col-lg-4">
+          <div className="w-75 m-auto border border-1 rounded p-4 mt-4">
+            <h1 className="fs-4">Register</h1>
+            <input
+              type="text"
+              class="form-control mt-4"
+              placeholder="First Name"
+              onChange={(e) => setUser({ ...user, firstName: e.target.value })}
+            />
+            <input
+              type="text"
+              class="form-control mt-4"
+              placeholder="Last Name"
+              onChange={(e) => setUser({ ...user, lastName: e.target.value })}
+            />
+            <input
+              type="text"
+              class="form-control mt-4"
+              placeholder="Email"
+              onChange={(e) => setUser({ ...user, email: e.target.value })}
+            />
+            <input
+              type="password"
+              class="form-control mt-3"
+              placeholder="Password"
+              onChange={(e) => setUser({ ...user, password: e.target.value })}
+            />
+            <button
+              className="w-100 btn btn-primary mt-4"
+              onClick={handleRegister}
+            >
+              Register
+            </button>
+            <p className="mt-2">
+              Already have an account? <Link to="/login">Login</Link>
+            </p>
+          </div>
+        </div>
       </div>
     </Layout>
   );
