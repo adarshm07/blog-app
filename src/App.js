@@ -16,7 +16,6 @@ import { useSelector } from "react-redux";
 
 function App() {
   const isLoggedIn = useSelector((state) => state.user.loggedIn);
-  console.log(isLoggedIn);
 
   const ProtectedRoute = ({ isLoggedIn, children }) => {
     if (!isLoggedIn) {

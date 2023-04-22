@@ -28,6 +28,11 @@ export default function Header() {
       visible: "loggedIn",
     },
     {
+      name: "Category",
+      link: "/category",
+      visible: "loggedIn",
+    },
+    {
       name: "Logout",
       link: "/",
       visible: "loggedIn",
@@ -43,12 +48,6 @@ export default function Header() {
       </div>
 
       <div className="d-flex">
-        {/* {menu.map((item) => (
-          <Link key={item.name} to={item.link}>
-            <span className="nav-link fs-6 p-3 text-white">{item.name}</span>
-          </Link>
-        ))} */}
-
         {/* check if user is logged in or not, if logged in, show items where visible === "all" and visible === "loggedIn", and do not display items where visible === "NotLoggedIn", if not logged in, show items where visible === "all" and visible === "NotLoggedIn"   */}
         {menu
           .filter(

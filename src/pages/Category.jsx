@@ -1,10 +1,13 @@
+import { useDispatch } from "react-redux";
 import React, { useEffect, useState } from "react";
 import Layout from "../components/Layout";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { add } from "../store/categorySlice";
 
 export default function Category() {
   const [categories, setCategories] = useState([]);
+  const dispatch = useDispatch();
   // fetch api whenever a new category is added, updated or deleted, we need to let the useEffect know that it is updated.
   // as a workaround, we are using this. You can also use the redux store to do this, then you don't have to pass props to childs like we are doing in this example.
   const [observer, setObserver] = useState(false);
@@ -15,6 +18,7 @@ export default function Category() {
     );
     const response = await data.data.data;
     setCategories(response);
+    dispatch(add(response));
     setObserver(false);
   };
 

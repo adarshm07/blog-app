@@ -8,17 +8,20 @@ import Layout from "../components/Layout";
 
 export default function Blog() {
   const dispatch = useDispatch();
-  const blogs = useSelector((state) => state.posts.allPosts);
-  // you can also use a normal useState hook to store the blog posts, redux is used when you have
-  // some data which you need in more than one page or like globally over the application.
 
   const isLoggedIn = useSelector((state) => state.user.loggedIn);
+
+  const [blogPosts, setBlogPosts] = React.useState([]);
 
   // The 'fetchAllBlog' function is triggered, fetching all the blog posts using the URL specified in axios.get.
   const fetchAllBlog = async () => {
     const data = await axios.get(`http://localhost:4000/api/v1/blog/getAll`);
     const response = await data.data.data;
     dispatch(allPosts(response));
+
+    // reverse the array to display the latest post first
+    const reversed = [...response].reverse();
+    setBlogPosts(reversed);
   };
 
   // The 'deletePostById' function calls the API with the specified ID to delete a blog post. If the request is successful,
@@ -44,8 +47,8 @@ export default function Blog() {
       >
         <h1 className="text-center">Blog</h1>
       </div>
-      {blogs &&
-        blogs.map((item) => {
+      {blogPosts &&
+        blogPosts.map((item) => {
           return (
             <div key={item._id} className="card my-4">
               <div className="card-body">
