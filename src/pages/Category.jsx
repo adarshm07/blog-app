@@ -12,7 +12,7 @@ export default function Category() {
   // as a workaround, we are using this. You can also use the redux store to do this, then you don't have to pass props to childs like we are doing in this example.
   const [observer, setObserver] = useState(false);
 
-  const fetchAllBlog = async () => {
+  const fetchAllCategory = async () => {
     const data = await axios.get(
       `http://localhost:4000/api/v1/category/getAll`
     );
@@ -23,7 +23,7 @@ export default function Category() {
   };
 
   useEffect(() => {
-    fetchAllBlog();
+    fetchAllCategory();
   }, [observer]);
   return (
     <Layout>
