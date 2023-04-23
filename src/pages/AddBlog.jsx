@@ -18,8 +18,8 @@ function AddBlog() {
 
   // The form has an onSubmit event listener that triggers the handleSubmit function when the user submits the form. On successful completion of the POST request
   //  and addition of the new blog post, the user is redirected to the home page of the blog using the useNavigate hook.
-  function handleSubmit(event) {
-    event.preventDefault();
+  function handleSubmit(e) {
+    e.preventDefault();
     axios
       .post(`http://localhost:4000/api/v1/blog/add`, {
         title: title,
@@ -45,7 +45,25 @@ function AddBlog() {
     })();
   }, []);
 
-  console.log(selectedCategory);
+  // update the slug using title only if slug is empty.
+  const updateSlug = (e) => {
+    if (title !== "" && slug === "") {
+      const updatedSlug = e.target.value
+        .trim()
+        .toLowerCase()
+        .replace(/\s+/g, "-");
+      setSlug(updatedSlug);
+    }
+  };
+
+  // this will update the slug to a format suitable to be used for url.
+  const handleSlug = (e) => {
+    const updatedSlug = e.target.value
+      .trim()
+      .toLowerCase()
+      .replace(/\s+/g, "-");
+    setSlug(updatedSlug);
+  };
 
   return (
     <Layout>
@@ -57,7 +75,8 @@ function AddBlog() {
             className="form-control"
             id="title"
             value={title}
-            onChange={(event) => setTitle(event.target.value)}
+            onChange={(e) => setTitle(e.target.value)}
+            onBlur={updateSlug}
             placeholder="Title"
           />
         </div>
@@ -67,10 +86,12 @@ function AddBlog() {
           <span className="me-2">{window && window.location.origin}/</span>
           <input
             type="text"
-            className="form-control me-2"
-            onChange={(e) => setSlug(e.target.value)}
-            placeholder="Slug"
+            className="form-control"
+            id="slug"
             value={slug}
+            onChange={(e) => setSlug(e.target.value)}
+            onBlur={handleSlug}
+            placeholder="Slug"
           />
         </div>
 
