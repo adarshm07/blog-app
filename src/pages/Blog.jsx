@@ -11,8 +11,8 @@ export default function Blog() {
   const dispatch = useDispatch();
 
   const isLoggedIn = useSelector((state) => state.user.loggedIn);
-  const posts = useSelector((state) => state.posts.allPosts);
-  const allCategories = useSelector((state) => state.categories.categories);
+  // const posts = useSelector((state) => state.posts.allPosts);
+  // const allCategories = useSelector((state) => state.categories.categories);
 
   const [blogPosts, setBlogPosts] = useState([]);
   const [page, setPage] = useState(1);
@@ -51,7 +51,7 @@ export default function Blog() {
   useEffect(() => {
     fetchBlog(page, limit);
     fetchAllCategory();
-  }, [selectedCategory, page, limit]);
+  }, [selectedCategory, page]);
 
   // The 'deletePostById' function calls the API with the specified ID to delete a blog post. If the request is successful,
   // a toast message is displayed, and the 'fetchAllBlog' function is called to update the list of blog posts.
@@ -78,12 +78,12 @@ export default function Blog() {
   return (
     <Layout>
       <div
-        className="d-flex justify-content-center align-items-center bg-primary text-white"
+        className="d-flex flex-column justify-content-center align-items-center bg-primary text-white"
         style={{ height: "200px" }}
       >
         <h1 className="text-center">Blog</h1>
         <div className="d-flex gap-2">
-          <select onChange={handleCategoryChange}>
+          <select className="form-select" onChange={handleCategoryChange}>
             <option value="all">All</option>
             {categories.map((category) => (
               <option key={category._id} value={category._id}>

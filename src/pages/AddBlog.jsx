@@ -16,6 +16,18 @@ function AddBlog() {
   const [selectedCategory, setSelectedCategory] = useState("");
   const [slug, setSlug] = useState("");
 
+  useEffect(() => {
+    (async () => {
+      const data = await axios.get(
+        `http://localhost:4000/api/v1/category/getAll`
+      );
+      const response = await data.data.data;
+      dispatch(add(response));
+      // this will make sure that, even if no category is selected, the first category will be selected by default
+      setSelectedCategory(response[0]._id);
+    })();
+  }, []);
+
   // The form has an onSubmit event listener that triggers the handleSubmit function when the user submits the form. On successful completion of the POST request
   //  and addition of the new blog post, the user is redirected to the home page of the blog using the useNavigate hook.
   function handleSubmit(e) {
@@ -32,18 +44,6 @@ function AddBlog() {
         navigate("/");
       });
   }
-
-  useEffect(() => {
-    (async () => {
-      const data = await axios.get(
-        `http://localhost:4000/api/v1/category/getAll`
-      );
-      const response = await data.data.data;
-      dispatch(add(response));
-      // this will make sure that, even if no category is selected, the first category will be selected by default
-      setSelectedCategory(response[0]._id);
-    })();
-  }, []);
 
   // update the slug using title only if slug is empty.
   const updateSlug = (e) => {
